@@ -14,11 +14,12 @@ public class MainClass {
 
         if(lowerRange<upperRange){
            Integer[] numbersToCheck = createArrayOfNumbersToCheck(lowerRange, upperRange);
-           Integer[] result = checkForSymmetry(numbersToCheck);
+           Integer[] result1 = checkForSymmetry(numbersToCheck);
+           Integer[] result2 = checkForSymmetryOfSquare(result1);
 
-           for(int i = 0; i<result.length; i++){
-               if(result[i] != null) {
-                   System.out.println("Symmetrical number: " + result[i]);
+           for(int i = 0; i<result2.length; i++){
+               if(result2[i] != null) {
+                   System.out.println("Symmetrical number: " + result2[i]);
                }
            }
         }
@@ -37,7 +38,7 @@ public class MainClass {
     private static Integer[] checkForSymmetry(Integer[] integers){
         Integer[] result = new Integer[integers.length];
         for(int i = 0; i<integers.length; i++){
-            Integer integerToCompare = integers[i] * integers[i];
+            Integer integerToCompare = integers[i];
             String integerToReverse = integerToCompare.toString();
             String reversedInteger = "";
 
@@ -49,6 +50,25 @@ public class MainClass {
 
             }
         }
+        return result;
+    }
+    private static Integer[] checkForSymmetryOfSquare(Integer[] integers){
+        Integer[] result = new Integer[integers.length];
+        for(int i = 0; i<integers.length; i++){
+            if(integers[i] != null) {
+                Integer integerToCompare = integers[i] * integers[i];
+                String integerToReverse = integerToCompare.toString();
+                String reversedInteger = "";
+
+                for (int f = integerToReverse.length() - 1; f >= 0; f--) {
+                    reversedInteger = reversedInteger + integerToReverse.charAt(f);
+                }
+                if (reversedInteger.equals(integerToReverse) && reversedInteger.length() > 1) {
+                    result[i] = integers[i];
+
+                }
+            }
+    }
         return result;
     }
 }
